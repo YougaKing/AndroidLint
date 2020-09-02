@@ -19,6 +19,8 @@ android {
     }
     lintOptions {
         abortOnError false
+        // 仅检查指定的问题（根据 id 指定）
+        check 'LogUsage','NewThread'
     }
 }
 
