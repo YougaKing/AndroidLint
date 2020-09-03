@@ -1,10 +1,18 @@
 package com.paincker.lint.demo;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends Activity {
 
@@ -25,8 +33,22 @@ public class MainActivity extends Activity {
 
             }
         }).run();
+
+        Environment.getExternalStorageDirectory();
+
+        try {
+            ArrayList<NetworkInterface> networkInterfaces = Collections.list(NetworkInterface.getNetworkInterfaces());
+            for (NetworkInterface networkInterface : networkInterfaces) {
+                networkInterface.getHardwareAddress();
+            }
+
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     private void callNewApi() {
         new View(this).setOnScrollChangeListener(new View.OnScrollChangeListener() {
             @Override
